@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="64dp"
+    android:layout_marginBottom="64dp"
+    android:layout_marginLeft="128dp"
+    android:layout_marginRight="128dp"
+    android:gravity="center"
+    android:orientation="horizontal">
+    <Button 
+        android:id="@+id/button_edit"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="查看题库"
+        android:background="#FEEEED"
+        android:layout_marginRight="200dp"
+        android:onClick="onClick"/>
+    <Button 
+        android:id="@+id/button_pos"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="发布作业"
+        android:background="#FEEEED"
+        android:onClick="onClick"/>
+</LinearLayout>

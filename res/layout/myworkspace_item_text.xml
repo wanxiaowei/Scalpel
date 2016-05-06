@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textview_require"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="40"
+        android:background="#00FFAA"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/textview_status_hand"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="10"
+        android:background="#00AAFF"
+        android:gravity="center_vertical"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textview_status_angle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="10"
+        android:background="#00AAFF"
+        android:gravity="center_vertical"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textview_status_force"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="10"
+        android:background="#00AAFF"
+        android:gravity="center_vertical"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textview_status_length"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="10"
+        android:background="#00AAFF"
+        android:gravity="center_vertical"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="20"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="返回" />
+
+</LinearLayout>
