@@ -15,8 +15,7 @@ public class MyView extends View {
 
 	Paint mPaint = new Paint();
 	ArrayList<PointF> array = new ArrayList<PointF>();
-	float length=0;
-	float lastlength=0;
+	double length=0;
 	public MyView(Context context) {
 		super(context);
 		init();
@@ -91,7 +90,9 @@ public class MyView extends View {
 			@Override
 			public void run() {
 				if (time == lastTouchTime) {
-					lastlength=length;
+					long tm=System.currentTimeMillis();
+					Communication.setTmend(tm);
+					Communication.setLeng(length / 1366 * 23.44);
 					length=0;
 					array.clear();
 					postInvalidate();
@@ -100,8 +101,7 @@ public class MyView extends View {
 		}, 2000);
 	}
 	public interface FreshAction{
-		void freshAction(float length);
-		void getLastlength(float lastlength);
+		void freshAction(double length);
 	}
 
 }

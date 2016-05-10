@@ -11,6 +11,7 @@ public class StudentMenuActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_studentmenu);
+		// getIntent().getStringExtra("action");
 	}
 
 	public void onClick(View view) {
@@ -18,11 +19,15 @@ public class StudentMenuActivity extends Activity {
 		case R.id.button_guide: {
 			Intent intent = new Intent(StudentMenuActivity.this,
 					StudentGuideActivity.class);
+			// intent.putExtra("action", "123");
+
 			startActivity(intent);
 
 		}
 		case R.id.button_practice: {
-
+			Intent intent = new Intent(StudentMenuActivity.this,
+					StudentPracticeActivity.class);
+			startActivity(intent);
 		}
 		case R.id.button_homework: {
 

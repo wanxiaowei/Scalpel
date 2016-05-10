@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 public class ScalpelService extends Service {
 	int VendorID, ProductID;
-	Toast info = null;
 	public static final String TAG = "ScalpelService";
 	UsbDevice myUsbDevice;
 	UsbInterface Interface1;
@@ -52,7 +51,7 @@ public class ScalpelService extends Service {
 		while ((tmp--)>0) {
 			byte[] bt = new byte[20];
 			bt = receiveMessageFromPoint();
-			if(bt[0]==0) continue;
+			if(bt[0]==-100) continue;
 			for (int i = 0; i < 20; i++)
 				System.out.println(bt[i]);
 		}
@@ -63,7 +62,6 @@ public class ScalpelService extends Service {
 		System.out.println("开始进行枚举设备!");
 		if (mUsbManager == null) {
 			System.out.println("创建UsbManager失败，请重新启动应用！");
-			info.setText("创建UsbManager失败，请重新启动应用！");
 			return;
 		} else {
 			HashMap<String, UsbDevice> deviceList = mUsbManager.getDeviceList();
@@ -91,7 +89,7 @@ public class ScalpelService extends Service {
 					}
 				}
 			} else {
-				info.setText("请连接USB设备至PAD！");
+				System.out.println("failed");
 				Context context = getApplicationContext();
 				Toast.makeText(context, "请连接USB设备至PAD！", Toast.LENGTH_SHORT)
 						.show();
@@ -195,8 +193,10 @@ public class ScalpelService extends Service {
 	private byte[] receiveMessageFromPoint() {
 		byte[] buffer = new byte[20];
 		if (myDeviceConnection.bulkTransfer(epBulkIn, buffer, buffer.length,
-				2000) < 0)
+				2000) < 0){
+			buffer[0]=-100;
 			System.out.println("bulkIn返回输出为  负数");
+		}
 		else {
 			System.out.println("Receive Message Succese！");
 		}

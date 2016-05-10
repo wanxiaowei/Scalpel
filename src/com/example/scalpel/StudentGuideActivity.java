@@ -106,6 +106,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 					mp.setOnCompletionListener(new CompletionListener());
 					now=R.raw.changdu;
 					require.setText("要求：请保持并在行刀区模拟切开操作，切开长度50mm");
+					Communication.setLeng(0);
 					mp.start();
 				}
 				else {
@@ -127,7 +128,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 				break;
 			}
 			case R.raw.changdu:{
-				double tmp=nowlength/1366*23.44;
+				double tmp=Communication.getLeng();
 				if(tmp>4&&tmp<6){
 					mp.reset();
 					mp = MediaPlayer.create(StudentGuideActivity.this, R.raw.correct);
@@ -150,6 +151,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 				mp.setOnCompletionListener(new CompletionListener());
 				now=R.raw.changdu;
 				require.setText("要求：请保持并在行刀区模拟切开操作，切开长度50mm");
+				Communication.setLeng(0);
 				mp.start();
 				break;
 			}
@@ -162,7 +164,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 		
 	}
 	@Override
-	public void freshAction(final float length) {
+	public void freshAction(final double length) {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -173,18 +175,5 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 		});
 	}
 
-	@Override
-	public void getLastlength(final float lastlength) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				if(lastlength!=nowlength)
-				{
-					nowlength=lastlength;
-					lengthflag=true;
-				}
-			}
-		});
-		
-	}
+
 }

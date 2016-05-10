@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission android:name="android.permission.HARDWARE_TEST" />
+    <!--<uses-permission android:name="android.permission.HARDWARE_TEST" />-->
     <uses-feature
         android:name="android.hardware.usb.host"
         android:required="true" />
@@ -50,6 +50,10 @@
         </activity>
         <service android:name="com.example.scalpel.ScalpelService">
         </service>
+        <activity android:name=".StudentPracticeActivity" >
+        </activity>
+        <activity android:name=".StudentPracticeWorkspaceActivity" >
+        </activity>
     </application>
 
 </manifest>

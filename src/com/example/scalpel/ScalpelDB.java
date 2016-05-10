@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ScalpelDB extends SQLiteOpenHelper {
 	private final static String DATABASE_NAME = "scalpel.db";
-	private final static int DATABASE_VERSION = 1;
+	private final static int DATABASE_VERSION = 2;
 	private final static String TABLE_PROBLEM = "problem";
 	private final static String TABLE_HOMEWORK = "homework";
 
@@ -33,12 +33,14 @@ public class ScalpelDB extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
 		// TODO Auto-generated method stub
-		String sql;
-		sql = "DROP TABLE IF EXISTS " + TABLE_PROBLEM;
-		db.execSQL(sql);
-		sql = "DROP TABLE IF EXISTS " + TABLE_HOMEWORK;
-		db.execSQL(sql);
-		onCreate(db);
+		if (arg1 != arg2) {
+			String sql;
+			sql = "DROP TABLE IF EXISTS " + TABLE_PROBLEM;
+			db.execSQL(sql);
+			sql = "DROP TABLE IF EXISTS " + TABLE_HOMEWORK;
+			db.execSQL(sql);
+			onCreate(db);
+		}
 	}
 
 	public void myinsert(String TABLE_NAME, String option) {
