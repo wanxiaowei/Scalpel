@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -38,11 +39,13 @@ public class StudentPracticeActivity extends Activity {
 			TextView tv = new TextView(this);
 			if(num%2==1) tv.setBackgroundColor(Color.GRAY);
 			else tv.setBackgroundColor(Color.WHITE);
-			tv.setId(num);
+			tv.setGravity(Gravity.CENTER);
+			tv.setTag(num);
 			tv.setTextSize(20);
 			tv.setOnClickListener(listener);
 			tv.setText(problem_id+". "+problem_require);
-			LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+			lp.gravity=Gravity.CENTER_VERTICAL;
 			layout.addView(tv,lp);
 		}
 		scalpeldb.close();
@@ -54,7 +57,7 @@ public class StudentPracticeActivity extends Activity {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent(StudentPracticeActivity.this,
 					StudentPracticeWorkspaceActivity.class);
-			intent.putExtra("problem_id", pro[arg0.getId()]);
+			intent.putExtra("problem_id", pro[(Integer)arg0.getTag()]);
 			startActivity(intent);
 		}
 	};

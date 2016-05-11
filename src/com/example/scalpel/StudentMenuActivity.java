@@ -22,12 +22,14 @@ public class StudentMenuActivity extends Activity {
 			// intent.putExtra("action", "123");
 
 			startActivity(intent);
+			break;
 
 		}
 		case R.id.button_practice: {
 			Intent intent = new Intent(StudentMenuActivity.this,
 					StudentPracticeActivity.class);
 			startActivity(intent);
+			break;
 		}
 		case R.id.button_homework: {
 

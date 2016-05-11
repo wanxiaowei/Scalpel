@@ -93,6 +93,11 @@ public class MyView extends View {
 					long tm=System.currentTimeMillis();
 					Communication.setTmend(tm);
 					Communication.setLeng(length / 1366 * 23.44);
+					if(Communication.receive==true){
+						Communication.addLeng(length/1366*23.44);
+						Communication.cal();
+						Communication.ReceiveEnd();
+					}
 					length=0;
 					array.clear();
 					postInvalidate();

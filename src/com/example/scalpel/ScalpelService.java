@@ -15,6 +15,7 @@ import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -47,15 +48,33 @@ public class ScalpelService extends Service {
 		assignEndpoint(Interface1);
 		// 打开conn连接通道
 		openDevice(Interface1);
-		int tmp=10;
-		while ((tmp--)>0) {
-			byte[] bt = new byte[20];
-			bt = receiveMessageFromPoint();
-			if(bt[0]==-100) continue;
-			for (int i = 0; i < 20; i++)
-				System.out.println(bt[i]);
-		}
+		myThread m= new myThread();
+		new Thread(m).start();
 		return super.onStartCommand(intent, flags, startId); // 每次startService（intent）时都回调该方法
+	}
+
+	class myThread implements Runnable {
+		public void run() {
+			while (!Thread.currentThread().isInterrupted()) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
+				byte[] bt = new byte[20];
+				bt = receiveMessageFromPoint();
+				if (bt[0] == -100)
+					continue;
+				/*for (int i = 0; i < 20; i++)
+					System.out.println(bt[i]);*/
+				if (Communication.getReceive() == true) {
+					Communication.addnownum();
+					Communication.addHand(96);
+					Communication.addAngle(37);
+					Communication.addForce(188);
+				}
+			}
+		}
 	}
 
 	private void enumerateDevice(UsbManager mUsbManager) {
@@ -193,11 +212,10 @@ public class ScalpelService extends Service {
 	private byte[] receiveMessageFromPoint() {
 		byte[] buffer = new byte[20];
 		if (myDeviceConnection.bulkTransfer(epBulkIn, buffer, buffer.length,
-				2000) < 0){
-			buffer[0]=-100;
+				2000) < 0) {
+			buffer[0] = -100;
 			System.out.println("bulkIn返回输出为  负数");
-		}
-		else {
+		} else {
 			System.out.println("Receive Message Succese！");
 		}
 		return buffer;

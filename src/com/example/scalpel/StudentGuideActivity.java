@@ -34,6 +34,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.button_back: {
+			mp.release();
 			onBackPressed();
 			break;
 		}
