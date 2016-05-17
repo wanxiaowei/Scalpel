@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 public class ScalpelService extends Service {
 	int VendorID, ProductID;
+	final int bytelength=30;
 	public static final String TAG = "ScalpelService";
 	UsbDevice myUsbDevice;
 	UsbInterface Interface1;
@@ -28,6 +29,7 @@ public class ScalpelService extends Service {
 			epIntEndpointIn;
 	UsbManager myUsbManager;
 	UsbDeviceConnection myDeviceConnection;
+	int index=5;
 
 	public void onCreat() {
 		super.onCreate();
@@ -61,12 +63,15 @@ public class ScalpelService extends Service {
 				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
-				byte[] bt = new byte[20];
+				byte[] bt = new byte[bytelength];
 				bt = receiveMessageFromPoint();
 				if (bt[0] == -100)
 					continue;
-				/*for (int i = 0; i < 20; i++)
-					System.out.println(bt[i]);*/
+				if(index>0){
+					for (int i = 0; i < bytelength; i++)
+						System.out.println(bt[i]);
+					index--;
+				}
 				if (Communication.getReceive() == true) {
 					Communication.addnownum();
 					Communication.addHand(96);
@@ -210,7 +215,7 @@ public class ScalpelService extends Service {
 	}
 
 	private byte[] receiveMessageFromPoint() {
-		byte[] buffer = new byte[20];
+		byte[] buffer = new byte[bytelength];
 		if (myDeviceConnection.bulkTransfer(epBulkIn, buffer, buffer.length,
 				2000) < 0) {
 			buffer[0] = -100;
