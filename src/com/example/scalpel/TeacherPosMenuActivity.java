@@ -5,22 +5,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class TeacherMenuActivity extends Activity {
+public class TeacherPosMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_teachermenu);
+		setContentView(R.layout.activity_teacherposmenu);
 	}
 
 	public void onClick(View view) {
 		switch (view.getId()) {
-		case R.id.button_edit: {
-			Intent intent=new Intent(TeacherMenuActivity.this,TeacherEditActivity.class);
-			startActivity(intent);
+		case R.id.button_check: {
+			//Intent intent=new Intent(TeacherPosMenuActivity.this,TeacherEditActivity.class);
+			//startActivity(intent);
 			break;
 		}
-		case R.id.button_posmenu: {
-			Intent intent=new Intent(TeacherMenuActivity.this,TeacherPosMenuActivity.class);
+		case R.id.button_pos: {
+			Intent intent=new Intent(TeacherPosMenuActivity.this,TeacherPosActivity.class);
 			startActivity(intent);
 			break;
 		}

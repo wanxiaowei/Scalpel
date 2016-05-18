@@ -9,22 +9,22 @@
     android:gravity="center"
     android:orientation="horizontal">
     <Button 
-        android:id="@+id/button_edit"
+        android:id="@+id/button_check"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="查看题库"
+        android:text="查看当前作业情况"
         android:background="#FEEEED"
         android:layout_marginRight="200dp"
         android:onClick="onClick"/>
     <Button 
-        android:id="@+id/button_posmenu"
+        android:id="@+id/button_pos"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="发布作业"
+        android:text="布置新作业"
         android:background="#FEEEED"
         android:onClick="onClick"/>
 </LinearLayout>

@@ -56,6 +56,10 @@
         </activity>
         <activity android:name=".StudentPracticeWorkspaceActivity" >
         </activity>
+        <activity android:name=".TeacherPosActivity">
+        </activity>
+        <activity android:name=".TeacherPosMenuActivity">
+        </activity>
     </application>
 
 </manifest>

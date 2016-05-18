@@ -46,9 +46,10 @@ public class ScalpelDB extends SQLiteOpenHelper {
 	public void myinsert(String TABLE_NAME, String option) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		String sql;
-		sql = "INSERT INTO " + TABLE_NAME
-				+ " (require,hand,angle,force,length,time) " + " VALUES "
-				+ option;
+		sql = "INSERT INTO " + TABLE_NAME;
+		if(TABLE_NAME.equals(TABLE_PROBLEM))sql+=" (require,hand,angle,force,length,time) ";
+		else if(TABLE_NAME.equals(TABLE_HOMEWORK))sql+=" (problem_id,state) ";
+		sql=sql+" VALUES "+ option;
 		db.execSQL(sql);
 		db.close();
 	}
