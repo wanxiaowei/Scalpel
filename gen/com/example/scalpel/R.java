@@ -1091,7 +1091,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f070016;
         public static final int action_menu_presenter=0x7f070017;
         public static final int action_mode_close_button=0x7f070024;
-        public static final int action_settings=0x7f070064;
+        public static final int action_settings=0x7f070066;
         public static final int activity_chooser_view_content=0x7f070025;
         public static final int always=0x7f07000b;
         public static final int beginning=0x7f070011;
@@ -1106,7 +1106,7 @@ containing a value of this type.
         public static final int button_pos=0x7f070051;
         public static final int button_posmenu=0x7f07004f;
         public static final int button_practice=0x7f070042;
-        public static final int button_screenshot=0x7f07005f;
+        public static final int button_screenshot=0x7f07005c;
         public static final int button_sure=0x7f07004c;
         public static final int button_wochi=0x7f070056;
         public static final int button_zhibi=0x7f070057;
@@ -1164,16 +1164,18 @@ containing a value of this type.
         public static final int tabMode=0x7f070002;
         public static final int text_student=0x7f07003e;
         public static final int text_teacher=0x7f07003c;
-        public static final int textview_mark_angle=0x7f07005b;
-        public static final int textview_mark_force=0x7f07005c;
-        public static final int textview_mark_hand=0x7f07005a;
-        public static final int textview_mark_length=0x7f07005d;
-        public static final int textview_mark_total=0x7f07005e;
+        public static final int textview_mark=0x7f07005b;
+        public static final int textview_mark_angle=0x7f07005e;
+        public static final int textview_mark_force=0x7f07005f;
+        public static final int textview_mark_hand=0x7f07005d;
+        public static final int textview_mark_length=0x7f070060;
+        public static final int textview_mark_total=0x7f070061;
+        public static final int textview_name=0x7f07005a;
         public static final int textview_require=0x7f070059;
-        public static final int textview_status_angle=0x7f070061;
-        public static final int textview_status_force=0x7f070062;
-        public static final int textview_status_hand=0x7f070060;
-        public static final int textview_status_length=0x7f070063;
+        public static final int textview_status_angle=0x7f070063;
+        public static final int textview_status_force=0x7f070064;
+        public static final int textview_status_hand=0x7f070062;
+        public static final int textview_status_length=0x7f070065;
         public static final int title=0x7f07002b;
         public static final int top_action_bar=0x7f070020;
         public static final int up=0x7f070021;
@@ -1243,9 +1245,11 @@ containing a value of this type.
         public static final int item=0x7f030020;
         public static final int myworkspace=0x7f030021;
         public static final int myworkspace_item_button=0x7f030022;
-        public static final int myworkspace_item_practice=0x7f030023;
-        public static final int myworkspace_item_text=0x7f030024;
-        public static final int support_simple_spinner_dropdown_item=0x7f030025;
+        public static final int myworkspace_item_homework=0x7f030023;
+        public static final int myworkspace_item_mark=0x7f030024;
+        public static final int myworkspace_item_practice=0x7f030025;
+        public static final int myworkspace_item_text=0x7f030026;
+        public static final int support_simple_spinner_dropdown_item=0x7f030027;
     }
     public static final class menu {
         public static final int main=0x7f0e0000;

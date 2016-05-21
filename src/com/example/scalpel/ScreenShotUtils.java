@@ -13,12 +13,6 @@ import android.util.Log;
 import android.view.View;
 
 public class ScreenShotUtils {
-	/**
-	 * 进行截取屏幕
-	 * 
-	 * @param pActivity
-	 * @return bitmap
-	 */
 	public static Bitmap takeScreenShot(Activity pActivity) {
 		Bitmap bitmap = null;
 		View view = pActivity.getWindow().getDecorView();
@@ -34,7 +28,6 @@ public class ScreenShotUtils {
 		// 测量屏幕宽和高
 		view.getWindowVisibleDisplayFrame(frame);
 		int stautsHeight = frame.top;
-		Log.d("jiangqq", "状态栏的高度为:" + stautsHeight);
 
 		int width = pActivity.getWindowManager().getDefaultDisplay().getWidth();
 		int height = pActivity.getWindowManager().getDefaultDisplay()
