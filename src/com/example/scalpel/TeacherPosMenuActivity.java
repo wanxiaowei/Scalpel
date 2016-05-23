@@ -15,8 +15,8 @@ public class TeacherPosMenuActivity extends Activity {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.button_check: {
-			//Intent intent=new Intent(TeacherPosMenuActivity.this,TeacherEditActivity.class);
-			//startActivity(intent);
+			Intent intent=new Intent(TeacherPosMenuActivity.this,TeacherCheckActivity.class);
+			startActivity(intent);
 			break;
 		}
 		case R.id.button_pos: {

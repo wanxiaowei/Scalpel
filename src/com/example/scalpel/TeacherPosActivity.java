@@ -79,12 +79,16 @@ public class TeacherPosActivity extends Activity {
 		case R.id.button_sure:{
 			ScalpelDB scalpeldb=new ScalpelDB(this);
 			SQLiteDatabase dbtp=scalpeldb.getWritableDatabase();
-			dbtp.execSQL("DELETE FROM homework");
+			dbtp.execSQL("DELETE FROM homework;");
+			dbtp.execSQL("DROP TABLE IF EXISTS result;");
 			dbtp.close();
+			String addcol="CREATE TABLE result (id INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR(50)";
+			int now=0;
 			for(int i=0;i<num;i++){
 				int tag=(Integer)tv.get(i).getTag();
 				if(tag==2)
 				{
+					now++;
 					String sql=" (";
 					sql+=pro[i];
 					sql+=",'";
@@ -99,6 +103,13 @@ public class TeacherPosActivity extends Activity {
 					db.close();
 				}
 			}
+			dbtp=scalpeldb.getWritableDatabase();
+			for(char i='A';i<='A'+now-1;i++) addcol=addcol+",pro"+i+" VARCHAR(30)";
+			addcol=addcol+");";
+			System.out.println(addcol);
+			//addcol="CREATE TABLE result (id PRIMARY KEY AUTOINCREMENT,name VARCHAR(30));";
+			dbtp.execSQL(addcol);
+			dbtp.close();
 			scalpeldb.close();
 			onBackPressed();
 			break;

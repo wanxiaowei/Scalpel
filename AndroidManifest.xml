@@ -4,9 +4,9 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <!--<uses-permission android:name="android.permission.HARDWARE_TEST" />-->
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- uses-permission android:name="android.permission.HARDWARE_TEST" />-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature
         android:name="android.hardware.usb.host"
         android:required="true" />
@@ -32,9 +32,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
-            </intent-filter>-->
+            </intent-filter>
 
             <meta-data
                 android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
@@ -50,17 +50,21 @@
         </activity>
         <activity android:name=".TeacherEditInsertActivity" >
         </activity>
-        <service android:name="com.example.scalpel.ScalpelService">
+
+        <service android:name="com.example.scalpel.ScalpelService" >
         </service>
+
         <activity android:name=".StudentPracticeActivity" >
         </activity>
         <activity android:name=".StudentPracticeWorkspaceActivity" >
         </activity>
-        <activity android:name=".TeacherPosActivity">
+        <activity android:name=".TeacherPosActivity" >
         </activity>
-        <activity android:name=".TeacherPosMenuActivity">
+        <activity android:name=".TeacherPosMenuActivity" >
         </activity>
-        <activity android:name=".StudentHomeworkActivity">
+        <activity android:name=".StudentHomeworkActivity" >
+        </activity>
+        <activity android:name=".TeacherCheckActivity" >
         </activity>
     </application>
 

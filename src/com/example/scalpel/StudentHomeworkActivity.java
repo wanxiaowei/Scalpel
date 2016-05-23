@@ -128,15 +128,24 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 					TextView tv = new TextView(StudentHomeworkActivity.this);
 					int n = mk.size();
 					String words = "";
+					String res="INSERT INTO result (name";
+					for(char i='A';i<='A'+n-1;i++) res=res+",pro"+i;
+					res=res+") VALUES ('"+name+"'";
 					for (int i = 0; i < n; i++) {
 						mark now = mk.get(i);
-						String sql = "SELECT* FROM problem WHERE id=\""
+						String sql = "SELECT * FROM problem WHERE id=\""
 								+ now.id + "\"";
 						Cursor cjd = db.rawQuery(sql, null);
 						cjd.moveToFirst();
 						words = words + cjd.getString(COL_require) + "\n";
 						words = words + now.mytoString();
+						res=res+",'"+now.mytoString()+"'";
 					}
+					SQLiteDatabase dbwr = scalpeldb.getWritableDatabase();
+					res=res+")";
+					System.out.println(res);
+					dbwr.execSQL(res);
+					dbwr.close();
 					setContentView(R.layout.myworkspace_item_mark);
 					TextView textview_name = (TextView) findViewById(R.id.textview_name);
 					textview_name.setText(name + "µÄ³É¼¨µ¥");
