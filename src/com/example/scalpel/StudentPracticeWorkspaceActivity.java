@@ -19,8 +19,8 @@ import android.widget.Toast;
 
 public class StudentPracticeWorkspaceActivity extends Activity implements
 		FreshAction {
-	TextView require, hand, angle, force, length, total;
-	int COL_id, COL_require, COL_hand, COL_angle, COL_force, COL_length;
+	TextView require, hand, vetical, angle, force, length, time, total;
+	int COL_id, COL_require, COL_hand, COL_angle, COL_force, COL_length,COL_time;
 	MyHandler myHandler;
 	Thread t;
 	boolean screenshot=false;
@@ -39,15 +39,19 @@ public class StudentPracticeWorkspaceActivity extends Activity implements
 				layout);
 		require = (TextView) findViewById(R.id.textview_require);
 		hand = (TextView) findViewById(R.id.textview_mark_hand);
+		vetical=(TextView) findViewById(R.id.textview_mark_vetical);
 		angle = (TextView) findViewById(R.id.textview_mark_angle);
 		force = (TextView) findViewById(R.id.textview_mark_force);
 		length = (TextView) findViewById(R.id.textview_mark_length);
+		time = (TextView) findViewById(R.id.textview_mark_time);
 		total = (TextView) findViewById(R.id.textview_mark_total);
 		require.setText("要求：");
 		hand.setText("手型得分：");
+		vetical.setText("垂直度得分：");
 		angle.setText("倾斜角得分：");
 		force.setText("力度得分：");
 		length.setText("长度得分：");
+		time.setText("时间得分：");
 		total.setText("总得分：");
 		ScalpelDB scalpeldb = new ScalpelDB(this);
 		int tmp = getIntent().getIntExtra("problem_id", 0);
@@ -61,11 +65,13 @@ public class StudentPracticeWorkspaceActivity extends Activity implements
 		COL_angle = cursor.getColumnIndex("angle");
 		COL_force = cursor.getColumnIndex("force");
 		COL_length = cursor.getColumnIndex("length");
+		COL_time = cursor.getColumnIndex("time");
 		String RE = cursor.getString(COL_require);
 		Communication.setStdHand(cursor.getInt(COL_hand));
 		Communication.setStdAngle(cursor.getInt(COL_angle));
 		Communication.setStdForce(cursor.getInt(COL_force));
 		Communication.setStdLength(cursor.getInt(COL_length));
+		Communication.setStdTime(cursor.getInt(COL_time));
 		require.setText(RE);
 		scalpeldb.close();
 		Communication.ReceiveStart();
@@ -80,9 +86,11 @@ public class StudentPracticeWorkspaceActivity extends Activity implements
 			switch (msg.what) {
 			case 8100: {
 				hand.setText("手型得分：" + Communication.marhand);
+				vetical.setText("垂直度得分："+Communication.marvetical);
 				angle.setText("倾斜角得分：" + Communication.marangle);
 				force.setText("力量得分：" + Communication.marforce);
 				length.setText("线长得分：" + Communication.marleng);
+				time.setText("时间得分："+Communication.martime);
 				total.setText("总得分：" + Communication.martotal);
 				screenshot=true;
 				break;

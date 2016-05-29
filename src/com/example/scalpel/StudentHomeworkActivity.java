@@ -30,8 +30,7 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 	Cursor cursor, cursor_contest;
 	int nowmsg;
 	ScalpelDB scalpeldb;
-	double martotal, marhand, marvetical, marangle, marforce, marleng, marbend,
-			martime;
+	double martotal, marhand, marvetical, marangle, marforce, marleng, martime;
 	boolean screenshot = false;
 	ArrayList<mark> mk = new ArrayList();
 	String name;
@@ -58,12 +57,16 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 		marforce = 0;
 		marleng = 0;
 		martotal = 0;
-		marbend = 0;
 		marvetical = 0;
 		martime = 0;
 		SQLiteDatabase db = scalpeldb.getReadableDatabase();
 		String sql = "SELECT * FROM homework";
 		cursor_contest = db.rawQuery(sql, null);
+		if(cursor_contest.getCount()==0){
+			Toast.makeText(StudentHomeworkActivity.this, "当前无作业", Toast.LENGTH_SHORT).show();
+			onBackPressed();
+			return;
+		}
 		nowmsg = 1;
 		cursor_contest.moveToFirst();
 		COL_pro_id = cursor_contest.getColumnIndex("problem_id");
@@ -94,9 +97,16 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 		public void handleMessage(Message msg) {
 			int tmp = msg.what;
 			if (tmp == 5) {
+				martotal += Communication.martotal / 5;
+				marhand += Communication.marhand / 5;
+				marvetical += Communication.marvetical / 5;
+				marangle += Communication.marangle / 5;
+				marleng += Communication.marleng / 5;
+				marforce += Communication.marforce / 5;
+				martime += Communication.martime / 5;
 				int tid = cursor_contest.getInt(COL_pro_id);
-				mk.add(new mark(tid, marhand, marangle, marforce, marleng,
-						martotal));
+				mk.add(new mark(tid, marhand, marvetical, marangle, marforce,
+						marleng, martime, martotal));
 				if (cursor_contest.moveToNext()) {
 					SQLiteDatabase db = scalpeldb.getReadableDatabase();
 					String sql = "SELECT * FROM problem WHERE id = \""
@@ -114,7 +124,6 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 					marforce = 0;
 					marleng = 0;
 					martotal = 0;
-					marbend = 0;
 					marvetical = 0;
 					martime = 0;
 					Communication.ReceiveStart();
@@ -128,9 +137,10 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 					TextView tv = new TextView(StudentHomeworkActivity.this);
 					int n = mk.size();
 					String words = "";
-					String res="INSERT INTO result (name";
-					for(char i='A';i<='A'+n-1;i++) res=res+",pro"+i;
-					res=res+") VALUES ('"+name+"'";
+					String res = "INSERT INTO result (name";
+					for (char i = 'A'; i <= 'A' + n - 1; i++)
+						res = res + ",pro" + i;
+					res = res + ") VALUES ('" + name + "'";
 					for (int i = 0; i < n; i++) {
 						mark now = mk.get(i);
 						String sql = "SELECT * FROM problem WHERE id=\""
@@ -138,11 +148,11 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 						Cursor cjd = db.rawQuery(sql, null);
 						cjd.moveToFirst();
 						words = words + cjd.getString(COL_require) + "\n";
-						words = words + now.mytoString();
-						res=res+",'"+now.mytoString()+"'";
+						words = words + now.mytoString() + "\n";
+						res = res + ",'" + now.mytoString() + "'";
 					}
 					SQLiteDatabase dbwr = scalpeldb.getWritableDatabase();
-					res=res+")";
+					res = res + ")";
 					System.out.println(res);
 					dbwr.execSQL(res);
 					dbwr.close();
@@ -157,9 +167,11 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 			} else {
 				martotal += Communication.martotal / 5;
 				marhand += Communication.marhand / 5;
+				marvetical += Communication.marvetical / 5;
 				marangle += Communication.marangle / 5;
 				marleng += Communication.marleng / 5;
 				marforce += Communication.marforce / 5;
+				martime += Communication.martime / 5;
 				String RE = cursor.getString(COL_require);
 				nowmsg++;
 				require.setText(RE + nowmsg);
@@ -193,23 +205,30 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 
 	class mark {
 		int id;
-		double marhand, marvetical, marangle, marforce, marleng, marbend,
-				martime, martotal;
+		double marhand, marvetical, marangle, marforce, marleng, martime,
+				martotal;
 
-		mark(int _id, double _mh, double _ma, double _mf, double _ml, double _mt) {
+		mark(int _id, double _mh, double _mv, double _ma, double _mf,
+				double _ml, double _mti, double _mt) {
 			this.id = _id;
 			this.marhand = _mh;
+			this.marvetical = _mv;
 			this.marangle = _ma;
 			this.marforce = _mf;
 			this.marleng = _ml;
+			this.martime = _mti;
 			this.martotal = _mt;
 		}
 
 		String mytoString() {
-			DecimalFormat df = new DecimalFormat("0.0"); 
-			String tmp = "总得分：" + df.format(this.martotal) + "\n手型得分：" + df.format(this.marhand)
-					+ "    倾斜角得分：" + df.format(this.marangle) + "\n力度得分：" + df.format(this.marforce)
-					+ "    切开线长得分：" + df.format(this.marleng) + "\n";
+			DecimalFormat df = new DecimalFormat("0.0");
+			String tmp = "总得分：" + df.format(this.martotal) + "\n手型得分："
+					+ df.format(this.marhand) + "    垂直度得分："
+					+ df.format(this.marvetical) + "\n倾斜角得分："
+					+ df.format(this.marangle) + "    力度得分："
+					+ df.format(this.marforce) + "\n切开线长得分："
+					+ df.format(this.marleng) + "    时间得分："
+					+ df.format(this.martime);
 			return tmp;
 		}
 	}
@@ -226,7 +245,7 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 			}
 			break;
 		}
-		case R.id.button_back:{
+		case R.id.button_back: {
 			onBackPressed();
 			break;
 		}

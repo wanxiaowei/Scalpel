@@ -1,21 +1,25 @@
 package com.example.scalpel;
 
 public class Communication{
-	static String hand[]=new String[]{"执弓式","握持式","执笔式","反挑式"};
+	static String hand[]=new String[]{"","执弓式","握持式","执笔式","反挑式"};
 	static int handid,stdhandid;
-	static int vetical,angle,force,stdvetical,stdangle,stdforce;
-	static double leng,bend,stdleng;
+	static int vetical,angle,force,stdangle,stdforce,stdtime;
+	static double leng,stdleng;
 	static long tmstart,tmend;
 	static boolean receive;
 	static int nownum;
-	static double marhand,marangle,marforce,marleng,martotal;
+	static double marhand,marvetical,marangle,marforce,marleng,martotal,martime;
+	static double[] marhandtp=new double[5];
 	static void ReceiveStart(){
 		receive=true;
 		nownum=0;
+		for(int i=1;i<=4;i++) marhandtp[i]=0;
 		marhand=0;
+		marvetical=0;
 		marangle=0;
 		marforce=0;
 		marleng=0;
+		martime=0;
 	}
 	static void ReceiveEnd(){
 		receive=false;
@@ -24,15 +28,12 @@ public class Communication{
 		return receive;
 	}
 	static int getHandid(){
-		handid=0;
 		return handid; 
 	}
 	static int getAngle(){
-		angle=45;
 		return angle;
 	}
 	static int getForce(){
-		force=100;
 		return force;
 	}
 	static String getHand(){
@@ -56,9 +57,6 @@ public class Communication{
 	static void setLeng(double tmp){
 		leng=tmp;
 	}
-	static void setBend(double tmp){
-		bend=tmp;
-	}
 	static void setTmstart(long tmp){
 		tmstart=tmp;
 	}
@@ -77,11 +75,20 @@ public class Communication{
 	static void setStdLength(double tmp){
 		stdleng=tmp;
 	}
+	static void setStdTime(int tmp){
+		stdtime=tmp;
+	}
 	static void addnownum(){
 		nownum++;
 	}
-	static void addHand(int tmp){
-		marhand=(marhand*(nownum-1)+tmp)/nownum;
+	static void addHand(int _id,int tmp){
+		marhandtp[_id]+=tmp;
+		for(int i=1;i<=4;i++)
+			marhand=Math.max(marhand, marhandtp[i]/nownum);
+	}
+	static void addVetical(int tmp){
+		double tp=100-Math.max(0, Math.floor(Math.abs(tmp-90)-2));
+		marvetical=(marvetical*(nownum-1)+tp)/nownum;
 	}
 	static void addAngle(int tmp){
 		double tp=100-Math.max(0,Math.floor(Math.abs(tmp-stdangle)-2));
@@ -94,7 +101,10 @@ public class Communication{
 	static void addLeng(double tmp){
 		marleng=100-Math.max(0,(Math.floor((Math.abs(tmp-stdleng)-0.5)/0.1)));
 	}
+	static void addTime(){
+		martime=100-Math.max(0,(Math.floor((Math.abs((tmend-tmstart-2000)/100-stdtime*10)-10)/1)));
+	}
 	static void cal(){
-		martotal=(marleng+marhand+marangle+marforce)/4;
+		martotal=(marhand*0.6+marvetical*0.2+marangle*0.2)*0.5+(marforce*0.5+marleng*0.5)*0.3+martime*0.2;
 	}
 }

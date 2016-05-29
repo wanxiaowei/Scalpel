@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.example.scalpel.MyView.FreshAction;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
@@ -59,7 +60,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 			mp.setOnCompletionListener(new CompletionListener());
 			require.setText("要求：请采用执弓式执刀");
 			mp.start();
-			
+			break;
 		}
 		}
 	}
@@ -73,12 +74,13 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 			force.setText("力度：" + Communication.getForce());
 			switch (now) {
 			case R.raw.zhigongshi: {
-				if (Communication.getHandid() == 0) {
+				if (Communication.getHandid() == 1) {
 					mp.reset();
 					mp = MediaPlayer.create(StudentGuideActivity.this, R.raw.qingxie);
 					mp.setOnCompletionListener(new CompletionListener());
 					now=R.raw.qingxie;
 					require.setText("要求：请将手术刀倾斜45°");
+					hand.setBackgroundColor(Color.GREEN);
 					mp.start();
 				}
 				else {
@@ -86,6 +88,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 					mp = MediaPlayer.create(StudentGuideActivity.this, R.raw.shouxingwrong);
 					mp.setOnCompletionListener(new CompletionListener());
 					now=R.raw.shouxingwrong;
+					hand.setBackgroundColor(Color.RED);
 					mp.start();
 				}
 				break;
@@ -106,7 +109,8 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 					mp = MediaPlayer.create(StudentGuideActivity.this, R.raw.changdu);
 					mp.setOnCompletionListener(new CompletionListener());
 					now=R.raw.changdu;
-					require.setText("要求：请保持并在行刀区模拟切开操作，切开长度50mm");
+					require.setText("要求：请保持并在行刀区模拟切开操作，切开长度5cm");
+					angle.setBackgroundColor(Color.GREEN);
 					Communication.setLeng(0);
 					mp.start();
 				}
@@ -115,6 +119,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 					mp = MediaPlayer.create(StudentGuideActivity.this, R.raw.qingxiewrong);
 					mp.setOnCompletionListener(new CompletionListener());
 					now=R.raw.qingxiewrong;
+					angle.setBackgroundColor(Color.RED);
 					mp.start();
 				}
 				break;
@@ -135,6 +140,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 					mp = MediaPlayer.create(StudentGuideActivity.this, R.raw.correct);
 					mp.setOnCompletionListener(new CompletionListener());
 					now=R.raw.correct;
+					length.setBackgroundColor(Color.GREEN);
 					mp.start();
 				}
 				else{
@@ -142,6 +148,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 					mp = MediaPlayer.create(StudentGuideActivity.this, R.raw.changduwrong);
 					mp.setOnCompletionListener(new CompletionListener());
 					now=R.raw.changduwrong;
+					length.setBackgroundColor(Color.RED);
 					mp.start();
 				}
 				break;
@@ -151,7 +158,7 @@ public class StudentGuideActivity extends Activity implements FreshAction {
 				mp = MediaPlayer.create(StudentGuideActivity.this, R.raw.changdu);
 				mp.setOnCompletionListener(new CompletionListener());
 				now=R.raw.changdu;
-				require.setText("要求：请保持并在行刀区模拟切开操作，切开长度50mm");
+				require.setText("要求：请保持并在行刀区模拟切开操作，切开长度5cm");
 				Communication.setLeng(0);
 				mp.start();
 				break;

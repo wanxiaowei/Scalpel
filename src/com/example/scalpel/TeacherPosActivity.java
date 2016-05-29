@@ -45,7 +45,7 @@ public class TeacherPosActivity extends Activity {
 			tv.get(num).setTag(1);
 			tv.get(num).setTextSize(20);
 			tv.get(num).setOnClickListener(listener);
-			tv.get(num).setText(problem_id+". "+problem_require);
+			tv.get(num).setText((num+1)+". "+problem_require);
 			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 			lp.gravity=Gravity.CENTER_VERTICAL;
 			layout.addView(tv.get(num),lp);

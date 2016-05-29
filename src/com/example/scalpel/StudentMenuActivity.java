@@ -64,6 +64,7 @@ public class StudentMenuActivity extends Activity {
 								}
 							}).create();
 			alertDialog.show();
+			break;
 		}
 		}
 	}

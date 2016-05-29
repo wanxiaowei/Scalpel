@@ -3,6 +3,7 @@ package com.example.scalpel;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import android.R.bool;
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Context;
@@ -21,7 +22,7 @@ import android.widget.Toast;
 
 public class ScalpelService extends Service {
 	int VendorID, ProductID;
-	final int bytelength=30;
+	final int bytelength=50;
 	public static final String TAG = "ScalpelService";
 	UsbDevice myUsbDevice;
 	UsbInterface Interface1;
@@ -30,7 +31,7 @@ public class ScalpelService extends Service {
 	UsbManager myUsbManager;
 	UsbDeviceConnection myDeviceConnection;
 	int index=5;
-
+	int[] usbinf=new int[bytelength];
 	public void onCreat() {
 		super.onCreate();
 		Log.d(TAG, "onCreate() executed");
@@ -67,18 +68,83 @@ public class ScalpelService extends Service {
 				bt = receiveMessageFromPoint();
 				if (bt[0] == -100)
 					continue;
-				if(index>0){
+				/*if(index>0){
 					for (int i = 0; i < bytelength; i++)
 						System.out.println(bt[i]);
 					index--;
+				}*/
+				int infn=0;
+				int handid,hand = 0,vetical=0,angle = 0,force=0;
+				for(int i=0;bt[i]!=0||bt[i+1]!=0;i+=2){
+					usbinf[infn]=getint(bt[i],bt[i+1]);
+					System.out.print(usbinf[infn]);
+					infn++;
 				}
+				System.out.println();
+				if(usbinf[0]!=0) continue;;
+				if(usbinf[1]!=0) continue;
+				handid=usbinf[2];
+				int now=4,jz=0;
+				while(now<infn){
+					if(usbinf[now]==0&&usbinf[now+1]!=0){
+						hand=jz;
+						break;
+					}
+					jz=jz*10+usbinf[now];
+					now++;
+				}
+				now++;jz=0;
+				while(now<infn){
+					if(usbinf[now]==0&&usbinf[now+1]!=0){
+						vetical=jz;
+						break;
+					}
+					jz=jz*10+usbinf[now];
+					now++;
+				}
+				now++;jz=0;
+				while(now<infn){
+					if(usbinf[now]==0&&usbinf[now+1]!=0){
+						angle=jz;
+						break;
+					}
+					jz=jz*10+usbinf[now];
+					now++;
+				}
+				now++;jz=0;
+				while(now<infn){
+					if(now==infn-2){
+						force=jz;
+						break;
+					}
+					jz=jz*10+usbinf[now];
+					now++;
+				}
+				Communication.setHandid(handid);
+				Communication.setAngle(angle);
+				Communication.setForce(force);
+				Communication.setVetical(vetical);
 				if (Communication.getReceive() == true) {
 					Communication.addnownum();
-					Communication.addHand(96);
-					Communication.addAngle(37);
-					Communication.addForce(188);
+					Communication.addHand(handid,hand);
+					Communication.addVetical(vetical);
+					Communication.addAngle(angle);
+					Communication.addForce(force);
 				}
 			}
+		}
+		public int getint(byte t1,byte t2){
+			if(t1==0&&t2==-32) return 0;
+			if(t1==6&&t2==-8) return 1;
+			if(t1==24&&t2==-8) return 2;
+			if(t1==30&&t2==-32) return 3;
+			if(t1==96&&t2==-8) return 4;
+			if(t1==102&&t2==-32) return 5;
+			if(t1==120&&t2==-32) return 6;
+			if(t1==126&&t2==-8) return 7;
+			if(t1==-128&&t2==-8) return 8;
+			if(t1==-122&&t2==-32) return 9;
+			return -1;
 		}
 	}
 

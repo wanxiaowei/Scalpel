@@ -43,7 +43,7 @@ public class StudentPracticeActivity extends Activity {
 			tv.setTag(num);
 			tv.setTextSize(20);
 			tv.setOnClickListener(listener);
-			tv.setText(problem_id+". "+problem_require);
+			tv.setText(num+". "+problem_require);
 			LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 			lp.gravity=Gravity.CENTER_VERTICAL;
 			layout.addView(tv,lp);

@@ -16,6 +16,7 @@ public class MyView extends View {
 	Paint mPaint = new Paint();
 	ArrayList<PointF> array = new ArrayList<PointF>();
 	double length=0;
+	boolean first=true;
 	public MyView(Context context) {
 		super(context);
 		init();
@@ -61,6 +62,11 @@ public class MyView extends View {
 			switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN: {
 				array.add(new PointF(x, y));
+				if(first==true){
+					long tm=System.currentTimeMillis();
+					Communication.setTmstart(tm);
+					first=false;
+				}
 				break;
 			}
 			case MotionEvent.ACTION_MOVE: {
@@ -94,10 +100,12 @@ public class MyView extends View {
 					Communication.setTmend(tm);
 					Communication.setLeng(length / 1366 * 23.44);
 					if(Communication.receive==true){
+						Communication.addTime();
 						Communication.addLeng(length/1366*23.44);
 						Communication.cal();
 						Communication.ReceiveEnd();
 					}
+					first=true;
 					length=0;
 					array.clear();
 					postInvalidate();
