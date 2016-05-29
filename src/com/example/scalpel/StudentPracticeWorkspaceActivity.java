@@ -49,9 +49,9 @@ public class StudentPracticeWorkspaceActivity extends Activity implements
 		hand.setText("手型得分：");
 		vetical.setText("垂直度得分：");
 		angle.setText("倾斜角得分：");
-		force.setText("力度得分：");
-		length.setText("长度得分：");
-		time.setText("时间得分：");
+		force.setText("行刀力量得分：");
+		length.setText("行刀距离得分：");
+		time.setText("行刀时间得分：");
 		total.setText("总得分：");
 		ScalpelDB scalpeldb = new ScalpelDB(this);
 		int tmp = getIntent().getIntExtra("problem_id", 0);
@@ -88,9 +88,9 @@ public class StudentPracticeWorkspaceActivity extends Activity implements
 				hand.setText("手型得分：" + Communication.marhand);
 				vetical.setText("垂直度得分："+Communication.marvetical);
 				angle.setText("倾斜角得分：" + Communication.marangle);
-				force.setText("力量得分：" + Communication.marforce);
-				length.setText("线长得分：" + Communication.marleng);
-				time.setText("时间得分："+Communication.martime);
+				force.setText("行刀力量得分：" + Communication.marforce);
+				length.setText("行刀距离得分：" + Communication.marleng);
+				time.setText("行刀时间得分："+Communication.martime);
 				total.setText("总得分：" + Communication.martotal);
 				screenshot=true;
 				break;

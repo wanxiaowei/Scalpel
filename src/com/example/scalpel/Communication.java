@@ -30,11 +30,17 @@ public class Communication{
 	static int getHandid(){
 		return handid; 
 	}
+	static int getVetical(){
+		return vetical;
+	}
 	static int getAngle(){
 		return angle;
 	}
 	static int getForce(){
 		return force;
+	}
+	static double getTime(){
+		return (tmend-tmstart)/1000.0;
 	}
 	static String getHand(){
 		return hand[getHandid()];
@@ -83,26 +89,30 @@ public class Communication{
 	}
 	static void addHand(int _id,int tmp){
 		marhandtp[_id]+=tmp;
-		for(int i=1;i<=4;i++)
-			marhand=Math.max(marhand, marhandtp[i]/nownum);
+		marhand=marhandtp[stdhandid]/nownum;
 	}
 	static void addVetical(int tmp){
 		double tp=100-Math.max(0, Math.floor(Math.abs(tmp-90)-2));
+		tp=Math.max(tp, 0);
 		marvetical=(marvetical*(nownum-1)+tp)/nownum;
 	}
 	static void addAngle(int tmp){
 		double tp=100-Math.max(0,Math.floor(Math.abs(tmp-stdangle)-2));
+		tp=Math.max(tp, 0);
 		marangle=(marangle*(nownum-1)+tp)/nownum;
 	}
 	static void addForce(int tmp){
 		double tp=100-Math.max(0,Math.floor((Math.abs(tmp-stdforce)-20)/2));
+		tp=Math.max(tp, 0);
 		marforce=(marforce*(nownum-1)+tp)/nownum;
 	}
 	static void addLeng(double tmp){
 		marleng=100-Math.max(0,(Math.floor((Math.abs(tmp-stdleng)-0.5)/0.1)));
+		marleng=Math.max(marleng, 0);
 	}
 	static void addTime(){
 		martime=100-Math.max(0,(Math.floor((Math.abs((tmend-tmstart-2000)/100-stdtime*10)-10)/1)));
+		martime=Math.max(martime, 0);
 	}
 	static void cal(){
 		martotal=(marhand*0.6+marvetical*0.2+marangle*0.2)*0.5+(marforce*0.5+marleng*0.5)*0.3+martime*0.2;

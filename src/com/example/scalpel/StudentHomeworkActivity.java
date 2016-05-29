@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 public class StudentHomeworkActivity extends Activity implements FreshAction {
 	TextView require;
-	int COL_id, COL_require, COL_hand, COL_angle, COL_force, COL_length,
+	int COL_id, COL_require, COL_hand, COL_angle, COL_force, COL_length,COL_time,
 			COL_pro_id;
 	MyHandler myHandler;
 	Thread t;
@@ -80,12 +80,14 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 		COL_angle = cursor.getColumnIndex("angle");
 		COL_force = cursor.getColumnIndex("force");
 		COL_length = cursor.getColumnIndex("length");
+		COL_time=cursor.getColumnIndex("time");
 		String RE = cursor.getString(COL_require);
 		Communication.setStdHand(cursor.getInt(COL_hand));
 		Communication.setStdAngle(cursor.getInt(COL_angle));
 		Communication.setStdForce(cursor.getInt(COL_force));
 		Communication.setStdLength(cursor.getInt(COL_length));
-		require.setText(RE + 1);
+		Communication.setStdTime(cursor.getInt(COL_time));
+		require.setText(RE + " 第"+1+"次");
 		Communication.ReceiveStart();
 		myHandler = new MyHandler();
 		myThread m = new myThread();
@@ -118,7 +120,8 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 					Communication.setStdAngle(cursor.getInt(COL_angle));
 					Communication.setStdForce(cursor.getInt(COL_force));
 					Communication.setStdLength(cursor.getInt(COL_length));
-					require.setText(RE + 1);
+					Communication.setStdTime(cursor.getInt(COL_time));
+					require.setText(RE + " 第"+1+"次");
 					marhand = 0;
 					marangle = 0;
 					marforce = 0;
@@ -174,7 +177,7 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 				martime += Communication.martime / 5;
 				String RE = cursor.getString(COL_require);
 				nowmsg++;
-				require.setText(RE + nowmsg);
+				require.setText(RE + " 第"+nowmsg+"次");
 				Communication.ReceiveStart();
 				myThread m = new myThread();
 				t = new Thread(m);
@@ -225,9 +228,9 @@ public class StudentHomeworkActivity extends Activity implements FreshAction {
 			String tmp = "总得分：" + df.format(this.martotal) + "\n手型得分："
 					+ df.format(this.marhand) + "    垂直度得分："
 					+ df.format(this.marvetical) + "\n倾斜角得分："
-					+ df.format(this.marangle) + "    力度得分："
-					+ df.format(this.marforce) + "\n切开线长得分："
-					+ df.format(this.marleng) + "    时间得分："
+					+ df.format(this.marangle) + "    行刀力量得分："
+					+ df.format(this.marforce) + "\n行刀距离得分："
+					+ df.format(this.marleng) + "    行刀时间得分："
 					+ df.format(this.martime);
 			return tmp;
 		}

@@ -24,9 +24,9 @@ public class TeacherEditInsertActivity extends Activity {
 		require.setHint("请输入本操作题的题面，如：");
 		hand.setHint("请输入该题的标准手型代号(整数1,2,3,4)：1.执弓式，2.握持式，3.执笔式，4.反挑式");
 		angle.setHint("请输入该题标准倾斜角(单位°，整数)，如：45");
-		force.setHint("请输入该题标准力度(单位g，整数)，如：100");
-		length.setHint("请输入该题标准切开线长(单位cm，整数)，如：4");
-		time.setHint("请输入该题标准完成时间(单位s，整数)，如：10");
+		force.setHint("请输入该题标准行刀力量(单位g，整数)，如：100");
+		length.setHint("请输入该题标准行刀距离(单位cm，整数)，如：4");
+		time.setHint("请输入该题标准行刀时间(单位s，整数)，如：10");
 	}
 	public void onClick(View view){
 		switch(view.getId()){

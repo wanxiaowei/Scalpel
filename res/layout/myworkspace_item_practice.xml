@@ -11,6 +11,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_weight="40"
+        android:textSize="20sp"
         android:background="#00FFAA"
         android:gravity="center" />
 

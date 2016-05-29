@@ -1091,7 +1091,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f070016;
         public static final int action_menu_presenter=0x7f070017;
         public static final int action_mode_close_button=0x7f070024;
-        public static final int action_settings=0x7f07006b;
+        public static final int action_settings=0x7f07006d;
         public static final int activity_chooser_view_content=0x7f070025;
         public static final int always=0x7f07000b;
         public static final int beginning=0x7f070011;
@@ -1177,10 +1177,12 @@ containing a value of this type.
         public static final int textview_mark_vetical=0x7f070061;
         public static final int textview_name=0x7f07005d;
         public static final int textview_require=0x7f07005c;
-        public static final int textview_status_angle=0x7f070068;
-        public static final int textview_status_force=0x7f070069;
+        public static final int textview_status_angle=0x7f070069;
+        public static final int textview_status_force=0x7f07006a;
         public static final int textview_status_hand=0x7f070067;
-        public static final int textview_status_length=0x7f07006a;
+        public static final int textview_status_length=0x7f07006b;
+        public static final int textview_status_time=0x7f07006c;
+        public static final int textview_status_vetical=0x7f070068;
         public static final int title=0x7f07002b;
         public static final int top_action_bar=0x7f070020;
         public static final int up=0x7f070021;
@@ -1264,14 +1266,17 @@ containing a value of this type.
     public static final class raw {
         public static final int changdu=0x7f060000;
         public static final int changduwrong=0x7f060001;
-        public static final int correct=0x7f060002;
-        public static final int fantiaoshi=0x7f060003;
-        public static final int qingxie=0x7f060004;
-        public static final int qingxiewrong=0x7f060005;
-        public static final int shouxingwrong=0x7f060006;
-        public static final int wochishi=0x7f060007;
-        public static final int zhibishi=0x7f060008;
-        public static final int zhigongshi=0x7f060009;
+        public static final int chuizhiwrong=0x7f060002;
+        public static final int correct=0x7f060003;
+        public static final int fantiaoshi=0x7f060004;
+        public static final int liduwrong=0x7f060005;
+        public static final int qingxie=0x7f060006;
+        public static final int qingxiewrong=0x7f060007;
+        public static final int shouxingwrong=0x7f060008;
+        public static final int timewrong=0x7f060009;
+        public static final int wochishi=0x7f06000a;
+        public static final int zhibishi=0x7f06000b;
+        public static final int zhigongshi=0x7f06000c;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
